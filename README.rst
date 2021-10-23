@@ -74,7 +74,7 @@ Example 2
 
 .. code-block:: bash
 
-    >>> import semverit.semverit
+    >>> svit = semverit.SemVerIt(p_version="3.2.1")
     >>> print("{} - Initialize".format(svit.version))
     >>> print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
     >>> print("{} -> {} - Bump minor version".format(svit.version, svit.bump_min()))
