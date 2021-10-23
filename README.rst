@@ -37,9 +37,9 @@
 .. image:: https://img.shields.io/testpypi/v/SemVerIt
     :alt: PyPi
 
-Project Short Description (default ini)
+Manipulate semantic versioning (SemVer)
 
-    Project long description or extended summary goes in here (default ini)
+    Manipulate semantic version numbers. Currently, it only allows for the "0.0.0" format and should be expanded to allow for the rest of the specification as well. See also https://semver.org/
 
 =======
 Testing
