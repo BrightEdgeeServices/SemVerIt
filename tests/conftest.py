@@ -42,7 +42,6 @@ setuptools.setup(
 def setup_env(tmp_path):
     """Setup the environment base structure"""
     working_dir = tmp_path
-    # working_dir.mkdir()
     yield working_dir
     rm_tree(working_dir)
 

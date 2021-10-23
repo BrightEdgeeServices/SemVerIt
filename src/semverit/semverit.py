@@ -37,8 +37,6 @@ class SemVerIt:
         p_parent_log_name : str
             Name of the parent.  In combination witt he class name it will
             form the logger name.
-        p_logger : bool, default = False
-            Activate the logger
         p_verbose: bool, default = True
             Write messages to the console.
 
@@ -47,7 +45,7 @@ class SemVerIt:
         """
         self.success = True
         if p_parent_log_name:
-            self.log_name = "{}.{}".format(p_parent_log_name, _PROJ_NAME)
+            self._log_name = "{}.{}".format(p_parent_log_name, _PROJ_NAME)
             self.logger = logging.getLogger(self._log_name)
         self.verbose = p_verbose
 
@@ -223,16 +221,11 @@ def do_example1(p_cls=True):
 
     svit = SemVerIt()
     print("{} - Initialize".format(svit.version))
-    svit.bump_patch()
-    print("{} - Bump patch version".format(svit.version))
-    svit.bump_min()
-    print("{} - Bump minor version".format(svit.version))
-    svit.bump_min()
-    print("{} - Bump minor version again".format(svit.version))
-    svit.bump_patch()
-    print("{} - Bump patch version".format(svit.version))
-    svit.bump_maj()
-    print("{} - Bump major version".format(svit.version))
+    print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
+    print("{} -> {} - Bump minor version".format(svit.version, svit.bump_min()))
+    print("{} -> {} - Bump minor version again".format(svit.version, svit.bump_min()))
+    print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
+    print("{} -> {} - Bump major version".format(svit.version, svit.bump_maj()))
 
     archiver.print_footer()
     return success
@@ -266,16 +259,11 @@ def do_example2(p_cls=True):
 
     svit = SemVerIt(p_version="3.2.1")
     print("{} - Initialize".format(svit.version))
-    svit.bump_patch()
-    print("{} - Bump patch version".format(svit.version))
-    svit.bump_min()
-    print("{} - Bump minor version".format(svit.version))
-    svit.bump_min()
-    print("{} - Bump minor version again".format(svit.version))
-    svit.bump_patch()
-    print("{} - Bump patch version".format(svit.version))
-    svit.bump_maj()
-    print("{} - Bump major version".format(svit.version))
+    print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
+    print("{} -> {} - Bump minor version".format(svit.version, svit.bump_min()))
+    print("{} -> {} - Bump minor version again".format(svit.version, svit.bump_min()))
+    print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
+    print("{} -> {} - Bump major version".format(svit.version, svit.bump_maj()))
 
     archiver.print_footer()
     return success
@@ -310,16 +298,11 @@ def do_example3(p_cls=True):
     setup_pth = _create_setup_py()
     svit = SemVerIt(p_setup_py_pth=setup_pth)
     print("{} - Initialize".format(svit.version))
-    svit.bump_patch()
-    print("{} - Bump patch version".format(svit.version))
-    svit.bump_min()
-    print("{} - Bump minor version".format(svit.version))
-    svit.bump_min()
-    print("{} - Bump minor version again".format(svit.version))
-    svit.bump_patch()
-    print("{} - Bump patch version".format(svit.version))
-    svit.bump_maj()
-    print("{} - Bump major version".format(svit.version))
+    print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
+    print("{} -> {} - Bump minor version".format(svit.version, svit.bump_min()))
+    print("{} -> {} - Bump minor version again".format(svit.version, svit.bump_min()))
+    print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
+    print("{} -> {} - Bump major version".format(svit.version, svit.bump_maj()))
 
     beetools.beeutils.rm_tree(setup_pth.parents[0])
     archiver.print_footer()

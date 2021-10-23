@@ -41,51 +41,79 @@ Manipulate semantic versioning (SemVer)
 
     Manipulate semantic version numbers. Currently, it only allows for the "0.0.0" format and should be expanded to allow for the rest of the specification as well. See also https://semver.org/
 
-=======
-Testing
-=======
 
-This project uses ``pytest`` to run tests and also to test docstring examples.
+============
+Installation
+============
 
-Install the test dependencies.
-
-.. code-block:: bash
-
-    $ pip install - r requirements_test.txt
-
-Run the tests.
+To install the latest release on PyPI, simply run:
 
 .. code-block:: bash
 
-    $ pytest tests
-    === XXX passed in SSS seconds ===
+    $ pip install semverit
 
-==========
-Developing
-==========
-
-This project uses ``black`` to format code and ``flake8`` for linting. We also support ``pre-commit`` to ensure these have been run. To configure your local environment please install these development dependencies and set up the commit hooks.
-
-.. code-block:: bash
-
-    $ pip install black flake8 pre-commit
-    $ pre-commit install
 
 =========
-Releasing
+Example 1
 =========
-
-Releases are published automatically when a tag is pushed to GitHub.
 
 .. code-block:: bash
 
-    # Set next version number
-    export RELEASE = x.x.x
-    
-    # Create tags
-    git commit --allow -empty -m "Release $RELEASE"
-    git tag -a $RELEASE -m "Version $RELEASE"
-    
-    # Push
-    git push upstream --tags
+    >>> import semverit
+    >>> svit = semverit.SemVerIt()
+    >>> print("{} - Initialize".format(svit.version))
+    >>> print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
+    >>> print("{} -> {} - Bump minor version".format(svit.version, svit.bump_min()))
+    >>> print("{} -> {} - Bump minor version again".format(svit.version, svit.bump_min()))
+    >>> print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
+    >>> print("{} -> {} - Bump major version".format(svit.version, svit.bump_maj()))
 
+=========
+Example 2
+=========
+
+.. code-block:: bash
+
+    >>> import semverit.semverit
+    >>> print("{} - Initialize".format(svit.version))
+    >>> print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
+    >>> print("{} -> {} - Bump minor version".format(svit.version, svit.bump_min()))
+    >>> print("{} -> {} - Bump minor version again".format(svit.version, svit.bump_min()))
+    >>> print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
+    >>> print("{} -> {} - Bump major version".format(svit.version, svit.bump_maj()))
+
+=========
+Example 3
+=========
+
+.. code-block:: bash
+
+    >>> import semverit
+    >>> import tempfile
+    >>> _setup_py_contents = """import setuptools
+        setuptools.setup(
+        name="SemVerIt",
+        version="2.3.4",
+        author="Hendrik du Toit",
+        author_email="hendrik@brightedge.co.za",
+        description="Project description",
+        long_description="Project long description",
+        classifiers=[
+         "Development Status :: 1 - Planning",
+            "Intended Audience :: Developers",
+            "Topic :: Software Development",
+        "License :: OSI Approved :: MIT License",
+         "Programming Language :: Python :: 3.10",
+       ],
+    )
+    """
+    >>> working_dir = tempfile.mkdtemp()
+    >>> setup_py_pth = working_dir / "setup.py"
+    >>> setup_py_pth.write_text(_setup_py_contents)
+    >>> svit = semverit.SemVerIt(p_setup_py_pth=setup_pth)
+    >>> print("{} - Initialize".format(svit.version))
+    >>> print("{} -> {} - Bump patch version".format(svit.version,svit.bump_patch()))
+    >>> print("{} -> {} - Bump minor version".format(svit.version,svit.bump_min()))
+    >>> print("{} -> {} - Bump minor version again".format(svit.version, svit.bump_min()))
+    >>> print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
+    >>> print("{} -> {} - Bump major version".format(svit.version, svit.bump_maj()))
