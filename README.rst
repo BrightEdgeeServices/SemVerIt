@@ -34,7 +34,7 @@
     :alt: GitHub Actions - CI
     :target: https://github.com/hendrikdutoit/SemVerIt/actions/workflows/ci.yaml
 
-.. image:: https://img.shields.io/testpypi/v/SemVerIt
+.. image:: https://img.shields.io/pypi/v/SemVerIt
     :alt: PyPi
 
 Manipulate semantic versioning (SemVer)
