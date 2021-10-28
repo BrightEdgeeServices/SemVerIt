@@ -25,6 +25,19 @@ class TestSemVerIt:
         assert t_semverit.version == "0.0.1"
         pass
 
+    def test__init__logging(self):
+        """Assert class __init__"""
+        t_semverit = semverit.SemVerIt(p_parent_log_name=_PROJ_NAME)
+        assert t_semverit.success
+        assert t_semverit.maj == 0
+        assert t_semverit.min == 0
+        assert t_semverit.patch == 1
+        assert t_semverit.version == "0.0.1"
+        assert t_semverit._log_name == "{}.semverit".format(_PROJ_NAME)
+        assert t_semverit.logger
+        assert t_semverit.logger
+        pass
+
     def test__init__set_version(self):
         """Assert class __init__"""
         t_semverit = semverit.SemVerIt(p_version="3.2.1")
