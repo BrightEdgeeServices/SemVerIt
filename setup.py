@@ -16,9 +16,12 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/x-rst",
     classifiers=[
-        "Development Status :: 1 - Planning",
+        "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
+        "Topic :: Documentation",
         "Topic :: Software Development",
+        "Topic :: Software Development :: Version Control",
+        "Topic :: Software Development :: Version Control :: Git",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.0",
         "Programming Language :: Python :: 3.6",

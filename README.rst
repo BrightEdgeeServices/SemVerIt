@@ -39,7 +39,7 @@
 
 Manipulate semantic versioning (SemVer)
 
-    Manipulate semantic version numbers. Currently, it only allows for the "0.0.0" format and should be expanded to allow for the rest of the specification as well. See also https://semver.org/
+    Manipulate semantic version numbers. Create a new version number, initialize it with an, existing number or alternatively read it from an existing project setup.py file. See also https://semver.org/
 
 =======
 Testing
