@@ -238,7 +238,7 @@ def do_example2(p_cls=True):
     1.Initialize object with version = 3.2.1
     2. Bump the patch version
     3. Bump the minor version.  The patch version is reset to 0.
-    4. Bump the minor version.
+    4. Bump the minor version.git status
     5. Bump the patch version
     6. Bump the major version.  The patch and minor version are reset to 0.
 
