@@ -1,15 +1,15 @@
 import setuptools
 
 
-with open("README.rst", "r") as fh:
+with open("../README.rst", "r") as fh:
     long_description = fh.read()
-with open("requirements.txt", "r") as fh:
+with open("../requirements.txt", "r") as fh:
     requirements = [line.strip() for line in fh]
 
 
 setuptools.setup(
     name="SemVerIt",
-    version="0.0.6",
+    version="0.1.0",
     author="Hendrik du Toit",
     author_email="hendrik@brightedge.co.za",
     description="Insert project description here",

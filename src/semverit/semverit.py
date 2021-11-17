@@ -7,7 +7,7 @@ existing project setup.py file.
 See also https://semver.org/
 """
 
-from distutils.core import run_setup
+import configparser
 import logging
 from pathlib import Path
 import tempfile
@@ -24,7 +24,7 @@ class SemVerIt:
     """Manipulate semantic versioning (SemVer)"""
 
     def __init__(
-        self, p_version=None, p_setup_py_pth=None, p_parent_log_name="", p_verbose=True
+        self, p_version=None, p_setup_cfg_pth=None, p_parent_log_name="", p_verbose=True
     ):
         """Initialize the class
 
@@ -50,16 +50,15 @@ class SemVerIt:
         self.verbose = p_verbose
 
         self.version = "0.0.1"
-        if p_setup_py_pth:
-            if p_setup_py_pth.exists():
-                self.get_from_setup_py(p_setup_py_pth)
+        if p_setup_cfg_pth:
+            if p_setup_cfg_pth.exists():
+                self.version = self.get_from_setup_cfg(p_setup_cfg_pth)
         elif p_version:
             self.version = p_version
         major, minor, patch = self.version.split(".")
         self.maj = int(major)
         self.min = int(minor)
         self.patch = int(patch)
-        self.version = "{}.{}.{}".format(self.maj, self.min, self.patch)
         pass
 
     def bump_maj(self):
@@ -128,7 +127,7 @@ class SemVerIt:
         self.version = "{}.{}.{}".format(self.maj, self.min, self.patch)
         return self.version
 
-    def get_from_setup_py(self, p_pth):
+    def get_from_setup_cfg(self, p_pth):
         """Read the version number from the setup.py file.
 
         The setup.py file (should) contain the version number for the
@@ -139,7 +138,7 @@ class SemVerIt:
         Parameters
         ----------
         p_pth : Path
-            Path to the setup.py file
+            Path to the setup.cfg file
 
         Returns
         -------
@@ -151,13 +150,20 @@ class SemVerIt:
 
         """
         # content = p_pth.read_text()
-        dist = run_setup(p_pth, stop_after="init")
-        self.version = dist.get_version()
-        major, minor, patch = self.version.split(".")
-        self.maj = int(major)
-        self.min = int(minor)
-        self.patch = int(patch)
-        return self.version
+        # dist = run_setup(p_pth, stop_after="init")
+        # self.version = dist.get_version()
+        setup_cfg = configparser.ConfigParser(inline_comment_prefixes="#")
+        setup_cfg.read([p_pth])
+        if setup_cfg.has_option("metadata", "version"):
+            version = setup_cfg.get("metadata", "version")
+            major, minor, patch = version.split(".")
+            self.maj = int(major)
+            self.min = int(minor)
+            self.patch = int(patch)
+            self.version = version
+        else:
+            version = self.version
+        return version
 
 
 def do_examples(p_cls=True):
@@ -273,7 +279,7 @@ def do_example3(p_cls=True):
     """A working example of the implementation of SemVerIt.
 
     Example1 illustrate the following concepts:
-    1. Read the version from the setup.py file
+    1. Read the version from the setup.cfg file
     2. Bump the patch version
     3. Bump the minor version.  The patch version is reset to 0.
     4. Bump the minor version.
@@ -295,8 +301,8 @@ def do_example3(p_cls=True):
     archiver = Archiver(_PROJ_NAME, _PROJ_VERSION, _PROJ_DESC, _PROJ_PATH)
     archiver.print_header(p_cls=p_cls)
 
-    setup_pth = _create_setup_py()
-    svit = SemVerIt(p_setup_py_pth=setup_pth)
+    setup_pth = _create_setup_cfg()
+    svit = SemVerIt(p_setup_cfg_pth=setup_pth)
     print("{} - Initialize".format(svit.version))
     print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
     print("{} -> {} - Bump minor version".format(svit.version, svit.bump_min()))
@@ -309,31 +315,17 @@ def do_example3(p_cls=True):
     return success
 
 
-_setup_py_contents = """import setuptools
-
-setuptools.setup(
-    name="SemVerIt",
-    version="2.3.4",
-    author="Hendrik du Toit",
-    author_email="hendrik@brightedge.co.za",
-    description="Project description",
-    long_description="Project long description",
-    classifiers=[
-        "Development Status :: 1 - Planning",
-        "Intended Audience :: Developers",
-        "Topic :: Software Development",
-        "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3.10",
-    ],
-)
+_setup_cfg_contents = """\
+[metadata]
+version = 2.3.4
 """
 
 
-def _create_setup_py():
+def _create_setup_cfg():
     working_dir = Path(tempfile.mktemp())
     working_dir.mkdir()
-    setup_py_pth = working_dir / "setup.py"
-    setup_py_pth.write_text(_setup_py_contents)
+    setup_py_pth = working_dir / "setup.cfg"
+    setup_py_pth.write_text(_setup_cfg_contents)
     return setup_py_pth
 
 

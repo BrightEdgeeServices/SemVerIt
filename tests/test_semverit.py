@@ -48,10 +48,10 @@ class TestSemVerIt:
         assert t_semverit.version == "3.2.1"
         pass
 
-    def test__init__setup_py(self, create_setup_py):
+    def test__init__setup_cfg(self, create_setup_cfg):
         """Assert class __init__"""
-        setup_pth = create_setup_py
-        t_semverit = semverit.SemVerIt(p_setup_py_pth=setup_pth)
+        setup_pth = create_setup_cfg
+        t_semverit = semverit.SemVerIt(p_setup_cfg_pth=setup_pth)
         assert t_semverit.success
         assert t_semverit.maj == 2
         assert t_semverit.min == 3
@@ -77,15 +77,15 @@ class TestSemVerIt:
         assert t_semverit.bump_patch() == "0.0.2"
         pass
 
-    def test_get_from_setup_py(self, create_setup_py):
+    def test_get_from_setup_cfg(self, create_setup_cfg):
         """Assert class __init__"""
-        setup_pth = create_setup_py
+        setup_pth = create_setup_cfg
         t_semverit = semverit.SemVerIt()
-        t_semverit.get_from_setup_py(setup_pth)
+        t_semverit.get_from_setup_cfg(setup_pth)
         assert t_semverit.version == "2.3.4"
         pass
 
-    def test_do_examples(self, create_setup_py):
+    def test_do_examples(self):
         """Assert class __init__"""
         semverit.do_examples()
 
