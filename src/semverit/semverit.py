@@ -61,6 +61,121 @@ class SemVerIt:
         self.patch = int(patch)
         pass
 
+    def __eq__(self, p_other):
+        if self.version == p_other:
+            return True
+        else:
+            return False
+
+    def __le__(self, p_other):
+        o_major, o_minor, o_patch = p_other.split(".")
+        o_major = int(o_major)
+        o_minor = int(o_minor)
+        o_patch = int(o_patch)
+        if self.maj < o_major:
+            return True
+        elif self.maj == o_major:
+            if self.min < o_minor:
+                return True
+            elif self.min == o_minor:
+                if self.patch < o_patch:
+                    return True
+                elif self.patch == o_patch:
+                    return True
+                elif self.patch > o_patch:
+                    return False
+            elif self.min > o_minor:
+                return False
+        elif self.maj > o_major:
+            return False
+        pass
+
+    def __lt__(self, p_other):
+        o_major, o_minor, o_patch = p_other.split(".")
+        o_major = int(o_major)
+        o_minor = int(o_minor)
+        o_patch = int(o_patch)
+        if self.maj < o_major:
+            return True
+        elif self.maj == o_major:
+            if self.min < o_minor:
+                return True
+            elif self.min == o_minor:
+                if self.patch < o_patch:
+                    return True
+                elif self.patch == o_patch:
+                    return False
+                elif self.patch > o_patch:
+                    return False
+            elif self.min > o_minor:
+                return False
+        elif self.maj > o_major:
+            return False
+        pass
+
+    def __ge__(self, p_other):
+        o_major, o_minor, o_patch = p_other.split(".")
+        o_major = int(o_major)
+        o_minor = int(o_minor)
+        o_patch = int(o_patch)
+        if self.maj > o_major:
+            return True
+        elif self.maj == o_major:
+            if self.min > o_minor:
+                return True
+            elif self.min == o_minor:
+                if self.patch >= o_patch:
+                    return True
+                elif self.patch == o_patch:
+                    return False
+                elif self.patch < o_patch:
+                    return False
+            elif self.min < o_minor:
+                return False
+        elif self.maj < o_major:
+            return False
+        pass
+
+    def __gt__(self, p_other):
+        o_major, o_minor, o_patch = p_other.split(".")
+        o_major = int(o_major)
+        o_minor = int(o_minor)
+        o_patch = int(o_patch)
+        if self.maj > o_major:
+            return True
+        elif self.maj == o_major:
+            if self.min > o_minor:
+                return True
+            elif self.min == o_minor:
+                if self.patch > o_patch:
+                    return True
+                elif self.patch == o_patch:
+                    return False
+                elif self.patch < o_patch:
+                    return False
+            elif self.min < o_minor:
+                return False
+        elif self.maj < o_major:
+            return False
+        pass
+
+    def __ne__(self, p_other):
+        pass
+
+    def __next__(self):
+        if self.curr_pos < self.rel_cntr:
+            element = self.rel_notes[self.rel_list[self.curr_pos][0]][
+                self.rel_list[self.curr_pos][1]
+            ][self.rel_list[self.curr_pos][2]]
+            self.curr_pos += 1
+            return element
+        else:
+            raise StopIteration
+
+    def __repr__(self):
+        return self.version
+        pass
+
     def bump_maj(self):
         """Bump the major version.
 
@@ -324,9 +439,9 @@ version = 2.3.4
 def _create_setup_cfg():
     working_dir = Path(tempfile.mktemp())
     working_dir.mkdir()
-    setup_py_pth = working_dir / "setup.cfg"
-    setup_py_pth.write_text(_setup_cfg_contents)
-    return setup_py_pth
+    setup_cfg_pth = working_dir / "setup.cfg"
+    setup_cfg_pth.write_text(_setup_cfg_contents)
+    return setup_cfg_pth
 
 
 if __name__ == "__main__":

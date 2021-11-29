@@ -59,6 +59,92 @@ class TestSemVerIt:
         assert t_semverit.version == "2.3.4"
         pass
 
+    def test__eq__default(self, sample_set):
+        """Assert class __init__"""
+        t_semverit = semverit.SemVerIt("5.5.5")
+        assert not t_semverit == sample_set[0]  # '4.0.0'
+        assert not t_semverit == sample_set[1]  # '4.6.4'
+        assert not t_semverit == sample_set[2]  # '4.4.6'
+        assert not t_semverit == sample_set[3]  # '5.4.5'
+        assert not t_semverit == sample_set[4]  # '5.5.4'
+        assert t_semverit == sample_set[5]  # '5.5.5'
+        assert not t_semverit == sample_set[6]  # '5.5.6'
+        assert not t_semverit == sample_set[7]  # '5.6.5'
+        assert not t_semverit == sample_set[8]  # '6.0.0'
+        assert not t_semverit == sample_set[9]  # '6.4.6'
+        assert not t_semverit == sample_set[10]  # '6.6.4'
+        pass
+
+    def test__le__default(self, sample_set):
+        """Assert class __init__"""
+        t_semverit = semverit.SemVerIt("5.5.5")
+        assert not t_semverit <= sample_set[0]  # '4.0.0'
+        assert not t_semverit <= sample_set[1]  # '4.6.4'
+        assert not t_semverit <= sample_set[2]  # '4.4.6'
+        assert not t_semverit <= sample_set[3]  # '5.4.5'
+        assert not t_semverit <= sample_set[4]  # '5.5.4'
+        assert t_semverit <= sample_set[5]  # '5.5.5'
+        assert t_semverit <= sample_set[6]  # '5.5.6'
+        assert t_semverit <= sample_set[7]  # '5.6.5'
+        assert t_semverit <= sample_set[8]  # '6.0.0'
+        assert t_semverit <= sample_set[9]  # '6.4.6'
+        assert t_semverit <= sample_set[10]  # '6.6.4'
+        pass
+
+    def test__lt__default(self, sample_set):
+        """Assert class __init__"""
+        t_semverit = semverit.SemVerIt("5.5.5")
+        assert not t_semverit < sample_set[0]  # '4.0.0'
+        assert not t_semverit < sample_set[1]  # '4.6.4'
+        assert not t_semverit < sample_set[2]  # '4.4.6'
+        assert not t_semverit < sample_set[3]  # '5.4.5'
+        assert not t_semverit < sample_set[4]  # '5.5.4'
+        assert not t_semverit < sample_set[5]  # '5.5.5'
+        assert t_semverit < sample_set[6]  # '5.5.6'
+        assert t_semverit < sample_set[7]  # '5.6.5'
+        assert t_semverit < sample_set[8]  # '6.0.0'
+        assert t_semverit < sample_set[9]  # '6.4.6'
+        assert t_semverit < sample_set[10]  # '6.6.4'
+        pass
+
+    def test__ge__default(self, sample_set):
+        """Assert class __init__"""
+        t_semverit = semverit.SemVerIt("5.5.5")
+        assert t_semverit >= sample_set[0]  # '4.0.0'
+        assert t_semverit >= sample_set[1]  # '4.6.4'
+        assert t_semverit >= sample_set[2]  # '4.4.6'
+        assert t_semverit >= sample_set[3]  # '5.4.5'
+        assert t_semverit >= sample_set[4]  # '5.5.4'
+        assert t_semverit >= sample_set[5]  # '5.5.5'
+        assert not t_semverit >= sample_set[6]  # '5.5.6'
+        assert not t_semverit >= sample_set[7]  # '5.6.5'
+        assert not t_semverit >= sample_set[8]  # '6.0.0'
+        assert not t_semverit >= sample_set[9]  # '6.4.6'
+        assert not t_semverit >= sample_set[10]  # '6.6.4'
+        pass
+
+    def test__gt__default(self, sample_set):
+        """Assert class __init__"""
+        t_semverit = semverit.SemVerIt("5.5.5")
+        assert t_semverit > sample_set[0]  # '4.0.0'
+        assert t_semverit > sample_set[1]  # '4.6.4'
+        assert t_semverit > sample_set[2]  # '4.4.6'
+        assert t_semverit > sample_set[3]  # '5.4.5'
+        assert t_semverit > sample_set[4]  # '5.5.4'
+        assert not t_semverit > sample_set[5]  # '5.5.5'
+        assert not t_semverit > sample_set[6]  # '5.5.6'
+        assert not t_semverit > sample_set[7]  # '5.6.5'
+        assert not t_semverit > sample_set[8]  # '6.0.0'
+        assert not t_semverit > sample_set[9]  # '6.4.6'
+        assert not t_semverit > sample_set[10]  # '6.6.4'
+        pass
+
+    def test__repr__default(self, sample_set):
+        """Assert class __init__"""
+        t_semverit = semverit.SemVerIt("5.5.5")
+        assert t_semverit == "5.5.5"
+        pass
+
     def test_bump_maj(self, setup_env):
         """Assert class __init__"""
         t_semverit = semverit.SemVerIt()
