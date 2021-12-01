@@ -1,8 +1,8 @@
 """Manipulate semantic versioning (SemVer)
 
 Manipulate semantic version numbers.  Create a new version number,
-initialize it with an, existing number or alternatively read it from an
-existing project setup.py file.
+initialize it with an existing number or alternatively read it from an
+existing project setup.py file.  Compare a version number with another.
 
 See also https://semver.org/
 """
@@ -11,37 +11,53 @@ import configparser
 import logging
 from pathlib import Path
 import tempfile
-import beetools.beeutils
+
+# import beetools.beeutils
 from beetools.beearchiver import Archiver
 
 _PROJ_DESC = __doc__.split("\n")[0]
 _PROJ_PATH = Path(__file__)
 _PROJ_NAME = _PROJ_PATH.stem
-_PROJ_VERSION = "0.0.1"
 
 
 class SemVerIt:
-    """Manipulate semantic versioning (SemVer)"""
+    """Manipulate semantic versioning (SemVer)
+
+    Manipulate semantic version numbers.  Create a new version number,
+    initialize it with an existing number or alternatively read it from an
+    existing project setup.py file.  Compare a version number with another.
+
+    See also https://semver.org/
+    """
 
     def __init__(
-        self, p_version=None, p_setup_cfg_pth=None, p_parent_log_name="", p_verbose=True
-    ):
-        """Initialize the class
+        self,
+        p_version: str = None,
+        p_setup_cfg_pth: Path = None,
+        p_parent_log_name: str = None,
+        p_verbose: bool = True,
+    ) -> None:
+        """Create a new SemVerIt instance.
 
-        Parameters
-        ----------
-        p_version : str, default = None
+        :parm p_version:
             Initial version to start with.
-        p_setup_py_pth : Path default = None
-            setup.py file from where the version number can be read.
-        p_parent_log_name : str
+        :parm p_setup_cfg_pth:
+            setup.cfg file from where the version number can be read.
+        :parm p_parent_log_name:
             Name of the parent.  In combination witt he class name it will
             form the logger name.
-        p_verbose: bool, default = True
+        :parm p_verbose:
             Write messages to the console.
+        :return: SemverIt
 
-        Examples
-        --------
+        :Examples:
+        >>> import semverit
+        >>> svit = semverit.SemVerIt()
+        >>> print(svit)
+        0.0.1
+        >>> svit = semverit.SemVerIt('5.5.5')
+        >>> print(svit)
+        5.5.5
         """
         self.success = True
         if p_parent_log_name:
@@ -59,15 +75,42 @@ class SemVerIt:
         self.maj = int(major)
         self.min = int(minor)
         self.patch = int(patch)
-        pass
 
-    def __eq__(self, p_other):
+    def __eq__(self, p_other) -> bool:
+        """Equal: ==
+
+        :param p_other:
+            Version strings to compare.
+        :return: bool
+        examples::
+        >>> import semverit
+        >>> svit = semverit.SemVerIt('5.5.5')
+        >>> svit == '5.5.5'
+        True
+        >>> svit == '5.5.4'
+        False
+        """
         if self.version == p_other:
             return True
         else:
             return False
 
     def __le__(self, p_other):
+        """Less or equal: <=
+
+        :param p_other:
+            Version string to compare.
+        :return: bool
+        examples::
+        >>> import semverit
+        >>> svit = semverit.SemVerIt('5.5.5')
+        >>> svit <= '5.5.5'
+        True
+        >>> svit <= '5.5.4'
+        False
+        >>> svit <= '5.5.6'
+        True
+        """
         o_major, o_minor, o_patch = p_other.split(".")
         o_major = int(o_major)
         o_minor = int(o_minor)
@@ -88,9 +131,23 @@ class SemVerIt:
                 return False
         elif self.maj > o_major:
             return False
-        pass
 
     def __lt__(self, p_other):
+        """Less than: <
+
+        :param p_other:
+            Version string to compare.
+        :return: bool
+        examples::
+        >>> import semverit
+        >>> svit = semverit.SemVerIt('5.5.5')
+        >>> svit < '5.5.5'
+        False
+        >>> svit < '5.5.4'
+        False
+        >>> svit < '5.5.6'
+        True
+        """
         o_major, o_minor, o_patch = p_other.split(".")
         o_major = int(o_major)
         o_minor = int(o_minor)
@@ -111,9 +168,23 @@ class SemVerIt:
                 return False
         elif self.maj > o_major:
             return False
-        pass
 
-    def __ge__(self, p_other):
+    def __ge__(self, p_other) -> bool:
+        """Greater or equal: >=
+
+        :param p_other:
+            Version strings to compare.
+        :return: bool
+        examples::
+        >>> import semverit
+        >>> svit = semverit.SemVerIt('5.5.5')
+        >>> svit >= '5.5.5'
+        True
+        >>> svit >= '5.5.4'
+        True
+        >>> svit >= '5.5.6'
+        False
+        """
         o_major, o_minor, o_patch = p_other.split(".")
         o_major = int(o_major)
         o_minor = int(o_minor)
@@ -126,17 +197,31 @@ class SemVerIt:
             elif self.min == o_minor:
                 if self.patch >= o_patch:
                     return True
-                elif self.patch == o_patch:
-                    return False
+                # elif self.patch == o_patch:
+                #     return False
                 elif self.patch < o_patch:
                     return False
             elif self.min < o_minor:
                 return False
         elif self.maj < o_major:
             return False
-        pass
 
-    def __gt__(self, p_other):
+    def __gt__(self, p_other) -> bool:
+        """Greater than: >
+
+        :param p_other:
+            Version string to compare.
+        :return: bool
+        examples::
+        >>> import semverit
+        >>> svit = semverit.SemVerIt('5.5.5')
+        >>> svit > '5.5.5'
+        False
+        >>> svit > '5.5.4'
+        True
+        >>> svit > '5.5.6'
+        False
+        """
         o_major, o_minor, o_patch = p_other.split(".")
         o_major = int(o_major)
         o_minor = int(o_minor)
@@ -157,26 +242,41 @@ class SemVerIt:
                 return False
         elif self.maj < o_major:
             return False
-        pass
 
-    def __ne__(self, p_other):
-        pass
+    def __ne__(self, p_other) -> bool:
+        """Not equal: !=
 
-    def __next__(self):
-        if self.curr_pos < self.rel_cntr:
-            element = self.rel_notes[self.rel_list[self.curr_pos][0]][
-                self.rel_list[self.curr_pos][1]
-            ][self.rel_list[self.curr_pos][2]]
-            self.curr_pos += 1
-            return element
+        :param p_other:
+            Version string to compare.
+        :return: bool
+        examples::
+        >>> import semverit
+        >>> svit = semverit.SemVerIt('5.5.5')
+        >>> svit != '5.5.5'
+        False
+        >>> svit !='5.5.4'
+        True
+        >>> svit != '5.5.6'
+        True
+        """
+        if self.version == p_other:
+            return False
         else:
-            raise StopIteration
+            return True
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """printable representation of the object
+
+        :return: str
+        examples::
+        >>> import semverit
+        >>> svit = semverit.SemVerIt('5.5.5')
+        >>> svit
+        5.5.5
+        """
         return self.version
-        pass
 
-    def bump_maj(self):
+    def bump_maj(self) -> str:
         """Bump the major version.
 
         The major version will be increased by 1. In the process the minor
@@ -184,14 +284,12 @@ class SemVerIt:
         0.0.1 -> 1.0.0.
         0.1.2 -> 1.0.0
 
-        Returns
-        -------
-        version : str
-            Complete version string
-
-        Examples
-        --------
-
+        :return: str, Complete version string
+        examples::
+        >>> import semverit
+        >>> svit = semverit.SemVerIt('5.5.5')
+        >>> svit.bump_maj()
+        '6.0.0'
         """
         self.maj += 1
         self.min = 0
@@ -199,7 +297,7 @@ class SemVerIt:
         self.version = "{}.{}.{}".format(self.maj, self.min, self.patch)
         return self.version
 
-    def bump_min(self):
+    def bump_min(self) -> str:
         """Bump the minor version.
 
         The minor version will be increased by 1. The major version will
@@ -207,21 +305,19 @@ class SemVerIt:
         0.0.1 -> 0.1.0.
         0.1.2 -> 0.2.0
 
-        Returns
-        -------
-        version : str
-            Complete version string
-
-        Examples
-        --------
-
+        :return: str, Complete version string
+        examples::
+        >>> import semverit
+        >>> svit = semverit.SemVerIt('5.5.5')
+        >>> svit.bump_min()
+        '5.6.0'
         """
         self.min += 1
         self.patch = 0
         self.version = "{}.{}.{}".format(self.maj, self.min, self.patch)
         return self.version
 
-    def bump_patch(self):
+    def bump_patch(self) -> str:
         """Bump the patch version.
 
         The patch version will be increased by 1. The major- and the minor
@@ -229,40 +325,38 @@ class SemVerIt:
         0.0.1 -> 0.0.2.
         0.1.2 -> 0.1.3
 
-        Returns
-        -------
-        version : str
-            Complete version string
-
-        Examples
-        --------
-
+        :return: str, Complete version string
+        examples::
+        >>> import semverit
+        >>> svit = semverit.SemVerIt('5.5.5')
+        >>> svit.bump_patch()
+        '5.5.6'
         """
         self.patch += 1
         self.version = "{}.{}.{}".format(self.maj, self.min, self.patch)
         return self.version
 
-    def get_from_setup_cfg(self, p_pth):
+    def get_from_setup_cfg(self, p_pth) -> str:
         """Read the version number from the setup.py file.
 
-        The setup.py file (should) contain the version number for the
-        current module and package.  Most projects already has a setup.py
+        The project setup.cfg file (should) contain the version number for
+        the current module and package.  Most projects already has a setup.py
         file and is most probably also the correct version currently pushed
         to git.  It makes sense to read it from there.
 
-        Parameters
-        ----------
-        p_pth : Path
+        :parm p_pth:
             Path to the setup.cfg file
+        :return: str, Complete version string
 
-        Returns
-        -------
-        version : str
-            Complete version string
-
-        Examples
-        --------
-
+        >>> import semverit
+        >>> import tempfile
+        >>> from pathlib import Path
+        >>> cfg = Path(tempfile.mkdtemp(), 'setup.cfg')
+        >>> cfg.write_text(_setup_cfg_contents)
+        27
+        >>> svit = semverit.SemVerIt()
+        >>> svit.get_from_setup_cfg(p_pth = cfg)
+        '2.3.4'
         """
         # content = p_pth.read_text()
         # dist = run_setup(p_pth, stop_after="init")
@@ -281,40 +375,28 @@ class SemVerIt:
         return version
 
 
-def do_examples(p_cls=True):
+def do_examples(p_cls=True) -> bool:
     """A collection of implementation examples for SemVerIt.
 
     A collection of implementation examples for SemVerIt. The examples
     illustrate in a practical manner how to use the methods.  Each example
     show a different concept or implementation.
 
-    Parameters
-    ----------
-    p_cls : bool, default = True
+    :param p_cls:
         Clear the screen or not at startup of Archiver
-
-    Returns
-    -------
-    success : boolean
-        Execution status of the examples.
-
-    See Also
-    --------
-
-    Notes
-    -----
-
-    Examples
-    --------
-
+    :return: bool, Execution status of the examples.
     """
-    success = do_example1(p_cls)
-    success = do_example2(p_cls) and success
-    success = do_example3(p_cls) and success
+    b_tls = Archiver(_PROJ_DESC, _PROJ_PATH)
+    b_tls.print_header(p_cls)
+    success = do_example1()
+    success = do_example2() and success
+    success = do_example3() and success
+    success = do_example4() and success
+    b_tls.print_footer()
     return success
 
 
-def do_example1(p_cls=True):
+def do_example1():
     """A working example of the implementation of SemVerIt.
 
     Example1 illustrate the following concepts:
@@ -325,21 +407,9 @@ def do_example1(p_cls=True):
     5. Bump the patch version
     6. Bump the major version.  The patch and minor version are reset to 0.
 
-    Parameters
-    ----------
-    p_cls : bool, default = True
-        Clear the screen or not at startup of Archiver
-
-    Returns
-    -------
-    success : boolean
-        Execution status of the example
-
+    :return: bool, Execution status of the examples.
     """
     success = True
-    archiver = Archiver(_PROJ_NAME, _PROJ_VERSION, _PROJ_DESC, _PROJ_PATH)
-    archiver.print_header(p_cls=p_cls)
-
     svit = SemVerIt()
     print("{} - Initialize".format(svit.version))
     print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
@@ -347,37 +417,23 @@ def do_example1(p_cls=True):
     print("{} -> {} - Bump minor version again".format(svit.version, svit.bump_min()))
     print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
     print("{} -> {} - Bump major version".format(svit.version, svit.bump_maj()))
-
-    archiver.print_footer()
     return success
 
 
-def do_example2(p_cls=True):
+def do_example2():
     """A working example of the implementation of SemVerIt.
 
     Example1 illustrate the following concepts:
     1.Initialize object with version = 3.2.1
     2. Bump the patch version
     3. Bump the minor version.  The patch version is reset to 0.
-    4. Bump the minor version.git status
+    4. Bump the minor version.
     5. Bump the patch version
     6. Bump the major version.  The patch and minor version are reset to 0.
 
-    Parameters
-    ----------
-    p_cls : bool, default = True
-        Clear the screen or not at startup of Archiver
-
-    Returns
-    -------
-    success : boolean
-        Execution status of the example
-
+    :return: bool, Execution status of the examples.
     """
     success = True
-    archiver = Archiver(_PROJ_NAME, _PROJ_VERSION, _PROJ_DESC, _PROJ_PATH)
-    archiver.print_header(p_cls=p_cls)
-
     svit = SemVerIt(p_version="3.2.1")
     print("{} - Initialize".format(svit.version))
     print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
@@ -385,12 +441,10 @@ def do_example2(p_cls=True):
     print("{} -> {} - Bump minor version again".format(svit.version, svit.bump_min()))
     print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
     print("{} -> {} - Bump major version".format(svit.version, svit.bump_maj()))
-
-    archiver.print_footer()
     return success
 
 
-def do_example3(p_cls=True):
+def do_example3():
     """A working example of the implementation of SemVerIt.
 
     Example1 illustrate the following concepts:
@@ -401,21 +455,9 @@ def do_example3(p_cls=True):
     5. Bump the patch version
     6. Bump the major version.  The patch and minor version are reset to 0.
 
-    Parameters
-    ----------
-    p_cls : bool, default = True
-        Clear the screen or not at startup of Archiver
-
-    Returns
-    -------
-    success : boolean
-        Execution status of the example
-
+    :return: bool, Execution status of the examples.
     """
     success = True
-    archiver = Archiver(_PROJ_NAME, _PROJ_VERSION, _PROJ_DESC, _PROJ_PATH)
-    archiver.print_header(p_cls=p_cls)
-
     setup_pth = _create_setup_cfg()
     svit = SemVerIt(p_setup_cfg_pth=setup_pth)
     print("{} - Initialize".format(svit.version))
@@ -424,9 +466,39 @@ def do_example3(p_cls=True):
     print("{} -> {} - Bump minor version again".format(svit.version, svit.bump_min()))
     print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
     print("{} -> {} - Bump major version".format(svit.version, svit.bump_maj()))
+    return success
 
-    beetools.beeutils.rm_tree(setup_pth.parents[0])
-    archiver.print_footer()
+
+def do_example4():
+    """A working example of the implementation of SemVerIt.
+
+    Example4 illustrate the comparison of versions/releases
+
+    :return: bool, Execution status of the examples.
+    """
+    success = True
+    # setup_pth = _create_setup_cfg()
+    sample = [
+        "4.0.0",
+        "4.6.4",
+        "4.4.6",
+        "5.4.5",
+        "5.5.4",
+        "5.5.5",
+        "5.5.6",
+        "5.6.5",
+        "6.0.0",
+        "6.4.6",
+        "6.6.4",
+    ]
+    svit = SemVerIt("5.5.5")
+    for ver in sample:
+        if svit == ver:
+            print("{} == {}".format(svit, ver))
+        elif svit > ver:
+            print("{} > {}".format(svit, ver))
+        elif svit < ver:
+            print("{} < {}".format(svit, ver))
     return success
 
 
