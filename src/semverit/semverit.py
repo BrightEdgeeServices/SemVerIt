@@ -337,7 +337,7 @@ class SemVerIt:
         return self.version
 
     def get_from_setup_cfg(self, p_pth) -> str:
-        """Read the version number from the setup.py file.
+        """Read the version number from the setup.cfg file.
 
         The project setup.cfg file (should) contain the version number for
         the current module and package.  Most projects already has a setup.py
