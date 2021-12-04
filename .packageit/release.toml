@@ -56,8 +56,14 @@ FileChanges = []
 
 [0.1.1]
 Version = '0.1.1'
-Title = 'Change the .'
+Title = 'Version 0.1.1'
 Description = ['Add missing parts to setup.cfg and fix semverit.py.',
                'Add missing setions and options to setup.cfg after dicontinuation of setup.py.',
                'Fix comments in semverit.get_from_setup_cfg.']
+FileChanges = []
+
+[0.2.0]
+Version = '0.2.0'
+Title = 'Version 0.2.0'
+Description = ['''Enable the ability to initialize the object with a list containing the version i.e. [1, 2, 3] or ['1', '2', '3'].''']
 FileChanges = []

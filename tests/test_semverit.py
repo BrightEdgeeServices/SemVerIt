@@ -35,7 +35,7 @@ class TestSemVerIt:
         assert t_semverit.logger
         assert t_semverit.logger
 
-    def test__init__set_version(self):
+    def test__init__version_str(self):
         """Assert class __init__"""
         t_semverit = semverit.SemVerIt(p_version="3.2.1")
         assert t_semverit.success
@@ -47,12 +47,30 @@ class TestSemVerIt:
     def test__init__setup_cfg(self, create_setup_cfg):
         """Assert class __init__"""
         setup_pth = create_setup_cfg
-        t_semverit = semverit.SemVerIt(p_setup_cfg_pth=setup_pth)
+        t_semverit = semverit.SemVerIt(p_version=setup_pth)
         assert t_semverit.success
         assert t_semverit.maj == 2
         assert t_semverit.min == 3
         assert t_semverit.patch == 4
         assert t_semverit.version == "2.3.4"
+
+    def test__init__version_list_int(self):
+        """Assert class __init__"""
+        t_semverit = semverit.SemVerIt(p_version=[3, 2, 1])
+        assert t_semverit.success
+        assert t_semverit.maj == 3
+        assert t_semverit.min == 2
+        assert t_semverit.patch == 1
+        assert t_semverit.version == "3.2.1"
+
+    def test__init__version_list_str(self):
+        """Assert class __init__"""
+        t_semverit = semverit.SemVerIt(p_version=["3", "2", "1"])
+        assert t_semverit.success
+        assert t_semverit.maj == 3
+        assert t_semverit.min == 2
+        assert t_semverit.patch == 1
+        assert t_semverit.version == "3.2.1"
 
     def test__eq__default(self, sample_set):
         """Assert class __init__"""
@@ -175,6 +193,14 @@ class TestSemVerIt:
         t_semverit = semverit.SemVerIt()
         t_semverit.get_from_setup_cfg(setup_pth)
         assert t_semverit.version == "2.3.4"
+        pass
+
+    def test_get_from_setup_cfg_with_no_version(self, create_setup_cfg_faulty):
+        """Assert class __init__"""
+        setup_pth = create_setup_cfg_faulty
+        t_semverit = semverit.SemVerIt()
+        t_semverit.get_from_setup_cfg(setup_pth)
+        assert t_semverit.version == "0.0.1"
         pass
 
     def test_do_examples(self):

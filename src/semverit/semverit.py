@@ -10,6 +10,7 @@ See also https://semver.org/
 import configparser
 import logging
 from pathlib import Path
+from typing import Union
 import tempfile
 
 # import beetools.beeutils
@@ -32,8 +33,8 @@ class SemVerIt:
 
     def __init__(
         self,
-        p_version: str = None,
-        p_setup_cfg_pth: Path = None,
+        p_version: Union[Path, str, list] = None,
+        # p_setup_cfg_pth: Path = None,
         p_parent_log_name: str = None,
         p_verbose: bool = True,
     ) -> None:
@@ -58,6 +59,12 @@ class SemVerIt:
         >>> svit = semverit.SemVerIt('5.5.5')
         >>> print(svit)
         5.5.5
+        >>> svit = semverit.SemVerIt([5 ,5 ,5])
+        >>> print(svit)
+        5.5.5
+        >>> svit = semverit.SemVerIt(['5' ,'5' ,'5'])
+        >>> print(svit)
+        5.5.5
         """
         self.success = True
         if p_parent_log_name:
@@ -65,12 +72,15 @@ class SemVerIt:
             self.logger = logging.getLogger(self._log_name)
         self.verbose = p_verbose
 
-        self.version = "0.0.1"
-        if p_setup_cfg_pth:
-            if p_setup_cfg_pth.exists():
-                self.version = self.get_from_setup_cfg(p_setup_cfg_pth)
-        elif p_version:
+        if isinstance(p_version, Path):
+            if p_version.exists():
+                self.version = self.get_from_setup_cfg(p_version)
+        elif isinstance(p_version, str):
             self.version = p_version
+        elif isinstance(p_version, list):
+            self.version = "{}.{}.{}".format(p_version[0], p_version[1], p_version[2])
+        else:
+            self.version = "0.0.1"
         major, minor, patch = self.version.split(".")
         self.maj = int(major)
         self.min = int(minor)
@@ -357,10 +367,12 @@ class SemVerIt:
         >>> svit = semverit.SemVerIt()
         >>> svit.get_from_setup_cfg(p_pth = cfg)
         '2.3.4'
+        >>> cfg.write_text(_setup_cfg_contents_faulty)
+        33
+        >>> svit = semverit.SemVerIt()
+        >>> svit.get_from_setup_cfg(p_pth = cfg)
+        '0.0.1'
         """
-        # content = p_pth.read_text()
-        # dist = run_setup(p_pth, stop_after="init")
-        # self.version = dist.get_version()
         setup_cfg = configparser.ConfigParser(inline_comment_prefixes="#")
         setup_cfg.read([p_pth])
         if setup_cfg.has_option("metadata", "version"):
@@ -459,7 +471,7 @@ def do_example3():
     """
     success = True
     setup_pth = _create_setup_cfg()
-    svit = SemVerIt(p_setup_cfg_pth=setup_pth)
+    svit = SemVerIt(p_version=setup_pth)
     print("{} - Initialize".format(svit.version))
     print("{} -> {} - Bump patch version".format(svit.version, svit.bump_patch()))
     print("{} -> {} - Bump minor version".format(svit.version, svit.bump_min()))
@@ -505,6 +517,11 @@ def do_example4():
 _setup_cfg_contents = """\
 [metadata]
 version = 2.3.4
+"""
+
+_setup_cfg_contents_faulty = """\
+[metadata]
+    something = 2.3.4
 """
 
 

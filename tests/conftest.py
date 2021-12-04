@@ -19,6 +19,11 @@ _setup_cfg_contents = """\
     version = 2.3.4
 """
 
+_setup_cfg_contents_faulty = """\
+[metadata]
+    something = 2.3.4
+"""
+
 
 @pytest.fixture
 def setup_env(tmp_path):
@@ -33,6 +38,14 @@ def create_setup_cfg(setup_env):
     working_dir = setup_env
     setup_py_pth = working_dir / "setup.cfg"
     setup_py_pth.write_text(_setup_cfg_contents)
+    return setup_py_pth
+
+
+@pytest.fixture
+def create_setup_cfg_faulty(setup_env):
+    working_dir = setup_env
+    setup_py_pth = working_dir / "setup.cfg"
+    setup_py_pth.write_text(_setup_cfg_contents_faulty)
     return setup_py_pth
 
 
