@@ -53,3 +53,11 @@ Description = ['Make configuration changes.',
                'Discontinue the usage of setup.py to exclusive usage of setup.cfg.',
                'Adapt tests.']
 FileChanges = []
+
+[0.1.1]
+Version = '0.1.1'
+Title = 'Change the .'
+Description = ['Add missing parts to setup.cfg and fix semverit.py.',
+               'Add missing setions and options to setup.cfg after dicontinuation of setup.py.',
+               'Fix comments in semverit.get_from_setup_cfg.']
+FileChanges = []
