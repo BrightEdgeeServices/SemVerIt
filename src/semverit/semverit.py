@@ -86,10 +86,10 @@ class SemVerIt:
         self.min = int(minor)
         self.patch = int(patch)
 
-    def __eq__(self, p_other) -> bool:
+    def __eq__(self, p_other: Union[str, "SemVerIt"]) -> bool:
         """Equal: ==
 
-        :param p_other:
+        :param p_other: Union[str, 'SemVerIt']
             Version strings to compare.
         :return: bool
         examples::
@@ -100,10 +100,12 @@ class SemVerIt:
         >>> svit == '5.5.4'
         False
         """
-        if self.version == p_other:
-            return True
-        else:
-            return False
+        rc = False
+        if isinstance(p_other, str) and self.version == p_other:
+            rc = True
+        elif isinstance(p_other, SemVerIt) and self.version == p_other.version:
+            rc = True
+        return rc
 
     def __le__(self, p_other):
         """Less or equal: <=
@@ -121,26 +123,33 @@ class SemVerIt:
         >>> svit <= '5.5.6'
         True
         """
-        o_major, o_minor, o_patch = p_other.split(".")
+        rc = False
+        if isinstance(p_other, str):
+            o_major, o_minor, o_patch = p_other.split(".")
+        elif isinstance(p_other, SemVerIt):
+            o_major, o_minor, o_patch = p_other.version.split(".")
+        else:
+            return rc
         o_major = int(o_major)
         o_minor = int(o_minor)
         o_patch = int(o_patch)
         if self.maj < o_major:
-            return True
+            rc = True
         elif self.maj == o_major:
             if self.min < o_minor:
-                return True
+                rc = True
             elif self.min == o_minor:
                 if self.patch < o_patch:
-                    return True
+                    rc = True
                 elif self.patch == o_patch:
-                    return True
+                    rc = True
                 elif self.patch > o_patch:
-                    return False
+                    rc = False
             elif self.min > o_minor:
-                return False
+                rc = False
         elif self.maj > o_major:
-            return False
+            rc = False
+        return rc
 
     def __lt__(self, p_other):
         """Less than: <
@@ -158,26 +167,34 @@ class SemVerIt:
         >>> svit < '5.5.6'
         True
         """
-        o_major, o_minor, o_patch = p_other.split(".")
+
+        rc = False
+        if isinstance(p_other, str):
+            o_major, o_minor, o_patch = p_other.split(".")
+        elif isinstance(p_other, SemVerIt):
+            o_major, o_minor, o_patch = p_other.version.split(".")
+        else:
+            return rc
         o_major = int(o_major)
         o_minor = int(o_minor)
         o_patch = int(o_patch)
         if self.maj < o_major:
-            return True
+            rc = True
         elif self.maj == o_major:
             if self.min < o_minor:
-                return True
+                rc = True
             elif self.min == o_minor:
                 if self.patch < o_patch:
-                    return True
+                    rc = True
                 elif self.patch == o_patch:
-                    return False
+                    rc = False
                 elif self.patch > o_patch:
-                    return False
+                    rc = False
             elif self.min > o_minor:
-                return False
+                rc = False
         elif self.maj > o_major:
-            return False
+            rc = False
+        return rc
 
     def __ge__(self, p_other) -> bool:
         """Greater or equal: >=
@@ -195,26 +212,34 @@ class SemVerIt:
         >>> svit >= '5.5.6'
         False
         """
-        o_major, o_minor, o_patch = p_other.split(".")
+        rc = False
+        if isinstance(p_other, str):
+            o_major, o_minor, o_patch = p_other.split(".")
+        elif isinstance(p_other, SemVerIt):
+            o_major, o_minor, o_patch = p_other.version.split(".")
+        else:
+            return rc
         o_major = int(o_major)
         o_minor = int(o_minor)
         o_patch = int(o_patch)
+
         if self.maj > o_major:
-            return True
+            rc = True
         elif self.maj == o_major:
             if self.min > o_minor:
-                return True
+                rc = True
             elif self.min == o_minor:
                 if self.patch >= o_patch:
-                    return True
+                    rc = True
                 # elif self.patch == o_patch:
                 #     return False
                 elif self.patch < o_patch:
-                    return False
+                    rc = False
             elif self.min < o_minor:
-                return False
+                rc = False
         elif self.maj < o_major:
-            return False
+            rc = False
+        return rc
 
     def __gt__(self, p_other) -> bool:
         """Greater than: >
@@ -232,26 +257,34 @@ class SemVerIt:
         >>> svit > '5.5.6'
         False
         """
-        o_major, o_minor, o_patch = p_other.split(".")
+        rc = False
+        if isinstance(p_other, str):
+            o_major, o_minor, o_patch = p_other.split(".")
+        elif isinstance(p_other, SemVerIt):
+            o_major, o_minor, o_patch = p_other.version.split(".")
+        else:
+            return rc
         o_major = int(o_major)
         o_minor = int(o_minor)
         o_patch = int(o_patch)
+
         if self.maj > o_major:
-            return True
+            rc = True
         elif self.maj == o_major:
             if self.min > o_minor:
-                return True
+                rc = True
             elif self.min == o_minor:
                 if self.patch > o_patch:
-                    return True
+                    rc = True
                 elif self.patch == o_patch:
-                    return False
+                    rc = False
                 elif self.patch < o_patch:
-                    return False
+                    rc = False
             elif self.min < o_minor:
-                return False
+                rc = False
         elif self.maj < o_major:
-            return False
+            rc = False
+        return rc
 
     def __ne__(self, p_other) -> bool:
         """Not equal: !=
@@ -269,10 +302,12 @@ class SemVerIt:
         >>> svit != '5.5.6'
         True
         """
-        if self.version == p_other:
-            return False
-        else:
-            return True
+        rc = False
+        if isinstance(p_other, str) and self.version != p_other:
+            rc = True
+        elif isinstance(p_other, SemVerIt) and self.version != p_other.version:
+            rc = True
+        return rc
 
     def __repr__(self) -> str:
         """printable representation of the object
