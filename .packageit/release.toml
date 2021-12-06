@@ -1,33 +1,41 @@
-[0.0.1]
-Version = '0.0.1'
-Title = 'Creation of the project'
-Description = ['List all the changes to the project here.',
-               'Changes listed here will be in the release notes under the above heading.']
-FileChanges = [['filename01.py','Insert change description here.'],
-               ['filename02.txt','Insert change description here.']]
-
-[0.0.2]
-Version = '0.0.2'
-Title = 'Experimenting with Git'
-Description = ['Experimented with ome of the project configuration changes that are not relevant to SemVerIt.',
-               'Coding is the same as 0.0.1.']
+[0.3.0]
+Version = '0.3.0'
+Title = 'Version 0.3.0'
+Description = ['Add __str__ dunder.',
+               '- Implement the __str__ dunder.']
+FileChanges = []
+[0.2.0]
+Version = '0.2.0'
+Title = 'Version 0.2.0'
+Description = ['Enable the ability to initialize the object with a list containing the version i.e. [1, 2, 3] or ["1", "2", "3"].',
+               'Compare (==, <=, <, >=, >, != ) with another SemVerIt object']
+FileChanges = []
+[0.2.0]
+Version = '0.2.0'
+Title = 'Version 0.2.0'
+Description = ['Enable the ability to initialize the object with a list containing the version i.e. [1, 2, 3] or ["1", "2", "3"].',
+               'Compare (==, <=, <, >=, >, != ) with another SemVerIt object']
+FileChanges = []
+[0.1.1]
+Version = '0.1.1'
+Title = 'Version 0.1.1'
+Description = ['Add missing parts to setup.cfg and fix semverit.py.',
+               'Add missing setions and options to setup.cfg after dicontinuation of setup.py.',
+               'Fix comments in semverit.get_from_setup_cfg.']
 FileChanges = []
 
-[0.0.3]
-Version = '0.0.3'
-Title = 'Streamlining for PackageIt'
-Description = ['Make log_name private.',
-               'Improve Example1.',
-               'Improve Example2.',
-               'Improve Example3.',
-               'Make working_dir a fixture']
+[0.1.0]
+Version = '0.1.0'
+Title = 'Discontinue the usage of setup.py.'
+Description = ['Make configuration changes.',
+               'Discontinue the usage of setup.py to exclusive usage of setup.cfg.',
+               'Adapt tests.']
 FileChanges = []
 
-[0.0.4]
-Version = '0.0.4'
-Title = 'Adapt examples'
-Description = ['Import statment was incorrect.',
-               'Changed version in setup.py.']
+[0.0.7]
+Version = '0.0.7'
+Title = 'Further non-impact experimental changes.'
+Description = ['Unknown']
 FileChanges = []
 
 [0.0.5]
@@ -40,31 +48,34 @@ Description = ['Updated project description.',
                'Changed version in setup.py.',]
 FileChanges = []
 
-[0.0.7]
-Version = '0.0.7'
-Title = 'Further non-impact experimental changes.'
-Description = ['Unknown']
+[0.0.4]
+Version = '0.0.4'
+Title = 'Adapt examples'
+Description = ['Import statment was incorrect.',
+               'Changed version in setup.py.']
 FileChanges = []
 
-[0.1.0]
-Version = '0.1.0'
-Title = 'Discontinue the usage of setup.py.'
-Description = ['Make configuration changes.',
-               'Discontinue the usage of setup.py to exclusive usage of setup.cfg.',
-               'Adapt tests.']
+[0.0.3]
+Version = '0.0.3'
+Title = 'Streamlining for PackageIt'
+Description = ['Make log_name private.',
+               'Improve Example1.',
+               'Improve Example2.',
+               'Improve Example3.',
+               'Make working_dir a fixture']
 FileChanges = []
 
-[0.1.1]
-Version = '0.1.1'
-Title = 'Version 0.1.1'
-Description = ['Add missing parts to setup.cfg and fix semverit.py.',
-               'Add missing setions and options to setup.cfg after dicontinuation of setup.py.',
-               'Fix comments in semverit.get_from_setup_cfg.']
+[0.0.2]
+Version = '0.0.2'
+Title = 'Experimenting with Git'
+Description = ['Experimented with ome of the project configuration changes that are not relevant to SemVerIt.',
+               'Coding is the same as 0.0.1.']
 FileChanges = []
 
-[0.2.0]
-Version = '0.2.0'
-Title = 'Version 0.2.0'
-Description = ['Enable the ability to initialize the object with a list containing the version i.e. [1, 2, 3] or ["1", "2", "3"].',
-               'Compare (==, <=, <, >=, >, != ) with another SemVerIt object']
-FileChanges = []
+[0.0.1]
+Version = '0.0.1'
+Title = 'Creation of the project'
+Description = ['List all the changes to the project here.',
+               'Changes listed here will be in the release notes under the above heading.']
+FileChanges = [['filename01.py','Insert change description here.'],
+               ['filename02.txt','Insert change description here.']]
