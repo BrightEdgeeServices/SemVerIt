@@ -297,6 +297,12 @@ class TestSemVerIt:
         assert t_semverit == "5.5.5"
         pass
 
+    def test__str__default(self, sample_set):
+        """Assert class __init__"""
+        t_semverit = semverit.SemVerIt("5.5.5")
+        assert t_semverit == "5.5.5"
+        pass
+
     def test_bump_maj(self, setup_env):
         """Assert class __init__"""
         t_semverit = semverit.SemVerIt()

@@ -321,6 +321,18 @@ class SemVerIt:
         """
         return self.version
 
+    def __str__(self) -> str:
+        """printable representation of the object
+
+        :return: str
+        examples::
+        >>> import semverit
+        >>> svit = semverit.SemVerIt('5.5.5')
+        >>> svit
+        5.5.5
+        """
+        return self.version
+
     def bump_maj(self) -> str:
         """Bump the major version.
 
