@@ -1,9 +1,17 @@
+[0.3.1]
+Version = '0.3.1'
+Title = 'Version 0.3.1'
+Description = ['setup.cfg initialized but not created.',
+               '-When the setup.cfg path is initialized, but the file is not created yet, the version is not read from the setup.cfg file..']
+FileChanges = []
+
 [0.3.0]
 Version = '0.3.0'
 Title = 'Version 0.3.0'
 Description = ['Add __str__ dunder.',
                '- Implement the __str__ dunder.']
 FileChanges = []
+
 [0.2.0]
 Version = '0.2.0'
 Title = 'Version 0.2.0'

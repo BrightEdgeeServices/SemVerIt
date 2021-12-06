@@ -72,9 +72,10 @@ class SemVerIt:
             self.logger = logging.getLogger(self._log_name)
         self.verbose = p_verbose
 
-        if isinstance(p_version, WindowsPath) or isinstance(p_version, PosixPath):
-            if p_version.exists():
-                self.version = self.get_from_setup_cfg(p_version)
+        if (
+            isinstance(p_version, WindowsPath) or isinstance(p_version, PosixPath)
+        ) and p_version.exists():
+            self.version = self.get_from_setup_cfg(p_version)
         elif isinstance(p_version, str):
             self.version = p_version
         elif isinstance(p_version, list):
