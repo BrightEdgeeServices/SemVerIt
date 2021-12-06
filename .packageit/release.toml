@@ -65,6 +65,6 @@ FileChanges = []
 [0.2.0]
 Version = '0.2.0'
 Title = 'Version 0.2.0'
-Description = ['''Enable the ability to initialize the object with a list containing the version i.e. [1, 2, 3] or ['1', '2', '3'].''',
-               '''Compare (==, <=, <, >=, >, != ) with another SemVerIt object]''']
+Description = ['Enable the ability to initialize the object with a list containing the version i.e. [1, 2, 3] or ["1", "2", "3"].',
+               'Compare (==, <=, <, >=, >, != ) with another SemVerIt object']
 FileChanges = []

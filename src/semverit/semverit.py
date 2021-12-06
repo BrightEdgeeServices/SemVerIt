@@ -9,7 +9,7 @@ See also https://semver.org/
 
 import configparser
 import logging
-from pathlib import Path
+from pathlib import Path, WindowsPath, PosixPath
 from typing import Union
 import tempfile
 
@@ -72,7 +72,7 @@ class SemVerIt:
             self.logger = logging.getLogger(self._log_name)
         self.verbose = p_verbose
 
-        if isinstance(p_version, Path):
+        if isinstance(p_version, WindowsPath) or isinstance(p_version, PosixPath):
             if p_version.exists():
                 self.version = self.get_from_setup_cfg(p_version)
         elif isinstance(p_version, str):
