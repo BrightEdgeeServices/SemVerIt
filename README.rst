@@ -16,10 +16,10 @@
 .. image:: https://img.shields.io/github/issues-raw/hendrikdutoit/SemVerIt
     :alt: GitHub issues
 
-.. image:: https://img.shields.io/pypi/dm/BEETest21
+.. image:: https://img.shields.io/pypi/dm/SemVerIt
     :alt: PyPI - Downloads
 
-.. image:: https://img.shields.io/github/search/hendrikdutoit/SemVerIt/GitHub hit
+.. image:: https://img.shields.io/github/search/hendrikdutoit/SemVerIt/GitHub
     :alt: GitHub Searches
 
 .. image:: https://img.shields.io/codecov/c/gh/hendrikdutoit/SemVerIt
@@ -37,9 +37,9 @@
 .. image:: https://img.shields.io/pypi/v/SemVerIt
     :alt: PyPi
 
-Manipulate semantic versioning (SemVer)
+Multi source file project
 
-    Manipulate semantic version numbers. Create a new version number, initialize it with an, existing number or alternatively read it from an existing project setup.py file. See also https://semver.org/
+    This still has to be sorted. See "PackageIt.create_readme"
 
 =======
 Testing

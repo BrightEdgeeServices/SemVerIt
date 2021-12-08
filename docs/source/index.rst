@@ -25,10 +25,10 @@ SemVerIt
 .. image:: https://img.shields.io/github/issues-raw/hendrikdutoit/SemVerIt
     :alt: GitHub issues
 
-.. image:: https://img.shields.io/pypi/dm/BEETest21
+.. image:: https://img.shields.io/pypi/dm/SemVerIt
     :alt: PyPI - Downloads
 
-.. image:: https://img.shields.io/github/search/hendrikdutoit/SemVerIt/GitHub hit
+.. image:: https://img.shields.io/github/search/hendrikdutoit/SemVerIt/GitHub
     :alt: GitHub Searches
 
 .. image:: https://img.shields.io/codecov/c/gh/hendrikdutoit/SemVerIt
