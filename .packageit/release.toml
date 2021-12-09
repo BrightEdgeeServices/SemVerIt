@@ -1,65 +1,52 @@
 [0.3.2]
-Title = 'Version 0.3.2'
-Description = ['Apply PackageIt improvements.',
-               '- Added release management to PackageIt. Apply the changes and inspect the results.']
+Title = "Version 0.3.2"
+Description = [
+    "Apply PackageIt improvements.",
+    "- Added release management to PackageIt. Apply the changes and inspect the results.",
+    'The initial version of a new created project should be 0.0.0 which indicate that it is a virgin project.',
+    '- SemVerIt currently return 0.0.1 for a new project,  Change it to 0.0.0'
+    ]
+
 [0.3.1]
-Title = 'Version 0.3.1'
-Description = ['setup.cfg initialized but not created.',
-               '- When the setup.cfg path is initialized, but the file is not created yet, the version is not read from the setup.cfg file.']
+Title = "Version 0.3.1"
+Description = [ "setup.cfg initialized but not created.", "- When the setup.cfg path is initialized, but the file is not created yet, the version is not read from the setup.cfg file.",]
 
 [0.3.0]
-Title = 'Version 0.3.0'
-Description = ['Add __str__ dunder.',
-               '- Implement the __str__ dunder.']
+Title = "Version 0.3.0"
+Description = [ "Add __str__ dunder.", "- Implement the __str__ dunder.",]
 
 [0.2.0]
-Title = 'Version 0.2.0'
-Description = ['Enable the ability to initialize the object with a list containing the version i.e. [1, 2, 3] or ["1", "2", "3"].',
-               'Compare (==, <=, <, >=, >, != ) with another SemVerIt object']
+Title = "Version 0.2.0"
+Description = [ "Enable the ability to initialize the object with a list containing the version i.e. [1, 2, 3] or [\"1\", \"2\", \"3\"].", "Compare (==, <=, <, >=, >, != ) with another SemVerIt object",]
 
 [0.1.1]
-Title = 'Version 0.1.1'
-Description = ['Add missing parts to setup.cfg and fix semverit.py.',
-               'Add missing setions and options to setup.cfg after dicontinuation of setup.py.',
-               'Fix comments in semverit.get_from_setup_cfg.']
+Title = "Version 0.1.1"
+Description = [ "Add missing parts to setup.cfg and fix semverit.py.", "Add missing sections and options to setup.cfg after discontinuation of setup.py.", "Fix comments in semverit.get_from_setup_cfg.",]
 
 [0.1.0]
-Title = 'Discontinue the usage of setup.py.'
-Description = ['Make configuration changes.',
-               'Discontinue the usage of setup.py to exclusive usage of setup.cfg.',
-               'Adapt tests.']
+Title = "Version 0.1.0"
+Description = [ "Discontinue the usage of setup.py.", "Make configuration changes.", "Discontinue the usage of setup.py to exclusive usage of setup.cfg.", "Adapt tests.",]
 
 [0.0.7]
-Title = 'Further non-impact experimental changes.'
-Description = ['Unknown']
+Title = "Version 0.0.7"
+Description = [ "Further non-impact experimental changes.", "Unknown",]
 
 [0.0.5]
-Title = 'Change initial project setup parameters.'
-Description = ['Updated project description.',
-               'Introduce the .packageit config structure.',
-               'Change the github workflow release.yaml to point to production PyPI.',
-               'Add logging test',
-               'Changed version in setup.py.',]
+Title = "Version 0.0.5"
+Description = [ "Change initial project setup parameters.", "Updated project description.", "Introduce the .packageit config structure.", "Change the github workflow release.yaml to point to production PyPI.", "Add logging test", "Changed version in setup.py.",]
 
 [0.0.4]
-Title = 'Adapt examples'
-Description = ['Import statment was incorrect.',
-               'Changed version in setup.py.']
+Title = "Version 0.0.4"
+Description = [ "Adapt examples", "Import statement was incorrect.", "Changed version in setup.py.",]
 
 [0.0.3]
-Title = 'Streamlining for PackageIt'
-Description = ['Make log_name private.',
-               'Improve Example1.',
-               'Improve Example2.',
-               'Improve Example3.',
-               'Make working_dir a fixture']
+Title = "Version 0.0.3"
+Description = [ "Streamlining for PackageIt", "Make log_name private.", "Improve Example1.", "Improve Example2.", "Improve Example3.", "Make working_dir a fixture",]
 
 [0.0.2]
-Title = 'Experimenting with Git'
-Description = ['Experimented with ome of the project configuration changes that are not relevant to SemVerIt.',
-               'Coding is the same as 0.0.1.']
+Title = "Version 0.0.2"
+Description = [ "Experimenting with Git", "Experimented with ome of the project configuration changes that are not relevant to SemVerIt.", "Coding is the same as 0.0.1.",]
 
 [0.0.1]
-Title = 'Creation of the project'
-Description = ['List all the changes to the project here.',
-               'Changes listed here will be in the release notes under the above heading.']
+Title = "Version 0.0.1"
+Description = [ "Creation of the project", "List all the changes to the project here.", "Changes listed here will be in the release notes under the above heading.",]

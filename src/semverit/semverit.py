@@ -55,7 +55,7 @@ class SemVerIt:
         >>> import semverit
         >>> svit = semverit.SemVerIt()
         >>> print(svit)
-        0.0.1
+        0.0.0
         >>> svit = semverit.SemVerIt('5.5.5')
         >>> print(svit)
         5.5.5
@@ -81,7 +81,7 @@ class SemVerIt:
         elif isinstance(p_version, list):
             self.version = "{}.{}.{}".format(p_version[0], p_version[1], p_version[2])
         else:
-            self.version = "0.0.1"
+            self.version = "0.0.0"
         major, minor, patch = self.version.split(".")
         self.maj = int(major)
         self.min = int(minor)
@@ -419,7 +419,7 @@ class SemVerIt:
         33
         >>> svit = semverit.SemVerIt()
         >>> svit.get_from_setup_cfg(p_pth = cfg)
-        '0.0.1'
+        '0.0.0'
         """
         setup_cfg = configparser.ConfigParser(inline_comment_prefixes="#")
         setup_cfg.read([p_pth])

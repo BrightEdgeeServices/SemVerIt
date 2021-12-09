@@ -20,8 +20,8 @@ class TestSemVerIt:
         assert t_semverit.success
         assert t_semverit.maj == 0
         assert t_semverit.min == 0
-        assert t_semverit.patch == 1
-        assert t_semverit.version == "0.0.1"
+        assert t_semverit.patch == 0
+        assert t_semverit.version == "0.0.0"
 
     def test__init__logging(self):
         """Assert class __init__"""
@@ -29,8 +29,8 @@ class TestSemVerIt:
         assert t_semverit.success
         assert t_semverit.maj == 0
         assert t_semverit.min == 0
-        assert t_semverit.patch == 1
-        assert t_semverit.version == "0.0.1"
+        assert t_semverit.patch == 0
+        assert t_semverit.version == "0.0.0"
         assert t_semverit._log_name == "{}.semverit".format(_PROJ_NAME)
         assert t_semverit.logger
         assert t_semverit.logger
@@ -145,6 +145,8 @@ class TestSemVerIt:
         assert t_semverit <= sample_set[10]  # '6.6.4'
         assert t_semverit <= semverit.SemVerIt(sample_set[10])
 
+        assert not t_semverit <= 0.0  # 0.0 Float
+
     def test__lt__default(self, sample_set):
         """Assert class __init__"""
         t_semverit = semverit.SemVerIt("5.5.5")
@@ -180,6 +182,8 @@ class TestSemVerIt:
 
         assert t_semverit < sample_set[10]  # '6.6.4'
         assert t_semverit < semverit.SemVerIt(sample_set[10])
+
+        assert not t_semverit < 0.0  # 0.0 Float
 
     def test__ge__default(self, sample_set):
         """Assert class __init__"""
@@ -217,6 +221,8 @@ class TestSemVerIt:
         assert not t_semverit >= sample_set[10]  # '6.6.4'
         assert not t_semverit >= semverit.SemVerIt(sample_set[10])
 
+        assert not t_semverit >= 0.0  # 0.0 Float
+
     def test__gt__default(self, sample_set):
         """Assert class __init__"""
         t_semverit = semverit.SemVerIt("5.5.5")
@@ -252,6 +258,8 @@ class TestSemVerIt:
 
         assert not t_semverit > sample_set[10]  # '6.6.4'
         assert not t_semverit > semverit.SemVerIt(sample_set[10])
+
+        assert not t_semverit > 0.0  # 0.0 Float
 
     def test__ne__default(self, sample_set):
         """Assert class __init__"""
@@ -289,6 +297,8 @@ class TestSemVerIt:
         assert t_semverit != sample_set[10]  # '6.6.4'
         assert t_semverit != semverit.SemVerIt(sample_set[10])
 
+        assert not t_semverit != 0.0  # 0.0 Float
+
         pass
 
     def test__repr__default(self, sample_set):
@@ -318,7 +328,7 @@ class TestSemVerIt:
     def test_bump_patch(self, setup_env):
         """Assert class __init__"""
         t_semverit = semverit.SemVerIt()
-        assert t_semverit.bump_patch() == "0.0.2"
+        assert t_semverit.bump_patch() == "0.0.1"
         pass
 
     def test_get_from_setup_cfg(self, create_setup_cfg):
@@ -334,7 +344,7 @@ class TestSemVerIt:
         setup_pth = create_setup_cfg_faulty
         t_semverit = semverit.SemVerIt()
         t_semverit.get_from_setup_cfg(setup_pth)
-        assert t_semverit.version == "0.0.1"
+        assert t_semverit.version == "0.0.0"
         pass
 
     def test_do_examples(self):
