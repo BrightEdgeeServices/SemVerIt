@@ -18,7 +18,7 @@ class TestSemVerIt:
         """Assert class __init__"""
         t_semverit = semverit.SemVerIt()
         assert t_semverit.success
-        assert t_semverit.maj == 0
+        assert t_semverit.maj == 1
         assert t_semverit.min == 0
         assert t_semverit.patch == 0
         assert t_semverit.version == "0.0.0"

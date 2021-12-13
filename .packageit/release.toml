@@ -1,11 +1,10 @@
+[0.3.3]
+Title = "Version 0.3.3"
+Description = [ "Apply PackageIt improvements.", "- . ",]
+
 [0.3.2]
 Title = "Version 0.3.2"
-Description = [
-    "Apply PackageIt improvements.",
-    "- Added release management to PackageIt. Apply the changes and inspect the results.",
-    'The initial version of a new created project should be 0.0.0 which indicate that it is a virgin project.',
-    '- SemVerIt currently return 0.0.1 for a new project,  Change it to 0.0.0'
-    ]
+Description = [ "Apply PackageIt improvements.", "- Added release management to PackageIt. Apply the changes and inspect the results.", "The initial version of a new created project should be 0.0.0 which indicate that it is a virgin project.", "- SemVerIt currently return 0.0.1 for a new project,  Change it to 0.0.0",]
 
 [0.3.1]
 Title = "Version 0.3.1"
