@@ -1,3 +1,7 @@
+[0.3.4]
+Title = "Version 0.3.4"
+Description = [ "Sync verssions.",]
+
 [0.3.3]
 Title = "Version 0.3.3"
 Description = [ "Apply PackageIt improvements.", "- . ",]
@@ -25,10 +29,6 @@ Description = [ "Add missing parts to setup.cfg and fix semverit.py.", "Add miss
 [0.1.0]
 Title = "Version 0.1.0"
 Description = [ "Discontinue the usage of setup.py.", "Make configuration changes.", "Discontinue the usage of setup.py to exclusive usage of setup.cfg.", "Adapt tests.",]
-
-[0.0.7]
-Title = "Version 0.0.7"
-Description = [ "Further non-impact experimental changes.", "Unknown",]
 
 [0.0.5]
 Title = "Version 0.0.5"

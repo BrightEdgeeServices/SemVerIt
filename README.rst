@@ -37,9 +37,9 @@
 .. image:: https://img.shields.io/pypi/v/SemVerIt
     :alt: PyPi
 
-Multi source file project
+Manipulate semantic versioning (SemVer)
 
-    This still has to be sorted. See "PackageIt.create_readme"
+    Manipulate semantic version numbers. Create a new version number, initialize it with an existing number or alternatively read it from an existing project setup.py file. Compare a version number with another. See also https://semver.org/
 
 =======
 Testing
@@ -51,7 +51,7 @@ Install the test dependencies.
 
 .. code-block:: bash
 
-    $ pip install - r requirements_test.txt
+    $ pip install -r requirements_test.txt
 
 Run the tests.
 
