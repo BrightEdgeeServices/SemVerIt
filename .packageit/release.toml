@@ -1,4 +1,8 @@
 [0.3.8]
+Title = "Version 0.3.9"
+Description = [ "Fix project description.", "- Project description still refers to setup.py instead of setup.cfg..",]
+
+[0.3.8]
 Title = "Version 0.3.8"
 Description = [ "Fix project description.", "- Project description still refers to setup.py instead of setup.cfg..",]
 
