@@ -11,10 +11,9 @@ import configparser
 import logging
 from pathlib import Path, WindowsPath, PosixPath
 from typing import Union
+import re
 import tempfile
-
-# import beetools.beeutils
-from beetools.beearchiver import Archiver
+from beetools.beearchiver import Archiver, msg_error
 
 _PROJ_DESC = __doc__.split("\n")[0]
 _PROJ_PATH = Path(__file__)
@@ -82,6 +81,7 @@ class SemVerIt:
             self.version = "{}.{}.{}".format(p_version[0], p_version[1], p_version[2])
         else:
             self.version = "0.0.0"
+        self.verify(self.version)
         major, minor, patch = self.version.split(".")
         self.maj = int(major)
         self.min = int(minor)
@@ -434,6 +434,13 @@ class SemVerIt:
             version = self.version
         return version
 
+    @staticmethod
+    def verify(p_version: Union[str, list]):
+        version = re.fullmatch(r"^[0-9]+\.[0-9]+\.[0-9]+$", p_version)
+        if not version:
+            raise FaultyVersionString(_status_codes[1100], p_version)
+        return True
+
 
 def do_examples(p_cls=True) -> bool:
     """A collection of implementation examples for SemVerIt.
@@ -579,6 +586,65 @@ def _create_setup_cfg():
     setup_cfg_pth = working_dir / "setup.cfg"
     setup_cfg_pth.write_text(_setup_cfg_contents)
     return setup_cfg_pth
+
+
+class SemVerItException(Exception):
+    """
+    Error handling in SemVerIt is done with exceptions. This class is the base of all exceptions raised by SemVerIt
+    Some other types of exceptions might be raised by underlying libraries.
+    """
+
+    def __init__(self, status, data):
+        super().__init__()
+        self.__code = status[0]
+        self.__data = data
+        self.__title = status[1]
+        print(msg_error(f"{self.__code}:{self.__title}"))
+        print(msg_error(f"Source = {self.__data}"))
+
+    @property
+    def code(self):
+        """
+        The (decoded) data returned by the PackageIt API
+        """
+        return self.__code
+
+    @property
+    def data(self):
+        """
+        The (decoded) data returned by the PackageIt API
+        """
+        return self.__data
+
+    @property
+    def title(self):
+        """
+        The status returned by the PackageIt API
+        """
+        return self.__title
+
+    def __str__(self):
+        return f"{self.__code}: {self.__title}"
+
+
+class FaultyVersionString(SemVerItException):
+    """
+    Exception raised if the version string is invalid.
+    """
+
+
+_status_codes = {
+    # Informational.
+    1000: (
+        1000,
+        "Placeholder",
+    ),
+    # Faulty version.
+    1100: (
+        1100,
+        "The version string is faulty.  It should be in the form of n.n.n i.e. 1.2.3",
+    ),
+}
 
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@
 
 from pathlib import Path
 from beetools.beearchiver import Archiver
+import pytest
 import semverit
 
 
@@ -72,9 +73,12 @@ class TestSemVerIt:
         assert t_semverit.patch == 1
         assert t_semverit.version == "3.2.1"
 
+    def test_do_examples(self):
+        """Assert class __init__"""
+        semverit.do_examples()
+
     def test__eq__default(self, sample_set):
         """Assert class __init__"""
-        t_semverit = semverit.SemVerIt("5.5.5")
         t_semverit = semverit.SemVerIt("5.5.5")
         assert not t_semverit == sample_set[0]  # '4.0.0'
         assert not t_semverit == semverit.SemVerIt(sample_set[0])
@@ -347,9 +351,14 @@ class TestSemVerIt:
         assert t_semverit.version == "0.0.0"
         pass
 
-    def test_do_examples(self):
-        """Assert class __init__"""
-        semverit.do_examples()
+    def test_verify_ok(self, sample_ok):
+        assert semverit.SemVerIt.verify(sample_ok)
+        pass
+
+    def test_verify_faulty(self, sample_faulty):
+        with pytest.raises(semverit.FaultyVersionString):
+            semverit.SemVerIt.verify(sample_faulty)
+        pass
 
 
 del b_tls

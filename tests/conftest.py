@@ -14,11 +14,29 @@ _PROJ_PATH = Path(__file__)
 
 b_tls = Archiver(_PROJ_DESC, _PROJ_PATH)
 
+_sample_faulty_set = [
+    "1.1.1.1",
+    "a.b.c",
+    "1a.b2.33",
+    "1.2.3.a",
+    "a.1.2.3",
+    "a..2.3",
+    "1..3",
+    ".1.",
+    "1.1.",
+    "10",
+    "111",
+]
+_sample_ok_set = [
+    "1.1.1",
+    "22.22.22",
+    "333.333.333",
+    "1.23.456",
+]
 _setup_cfg_contents = """\
 [metadata]
     version = 2.3.4
 """
-
 _setup_cfg_contents_faulty = """\
 [metadata]
     something = 2.3.4
@@ -64,6 +82,16 @@ def sample_set():
         "6.4.6",
         "6.6.4",
     ]
+
+
+@pytest.fixture(params=_sample_ok_set)
+def sample_ok(request):
+    yield request.param
+
+
+@pytest.fixture(params=_sample_faulty_set)
+def sample_faulty(request):
+    yield request.param
 
 
 del b_tls
