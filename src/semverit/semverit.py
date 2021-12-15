@@ -4,8 +4,8 @@ Manipulate semantic version strings:
 1. Create a new version number,
 1. initialize it with an existing number
 1. Read it from an existing project setup.cfg file.
-1. Validate the verstion string.
-1. Compare one version numberwith another.
+1. Validate the version string.
+1. Compare one version number with another.
 
 See also https://semver.org/
 """
