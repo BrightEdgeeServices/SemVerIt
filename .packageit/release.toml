@@ -1,3 +1,7 @@
+[0.3.7]
+Title = "Version 0.3.6"
+Description = [ "Fix project description.", "- Project description still refers to setup.py instead of setup.cfg..",]
+
 [0.3.6]
 Title = "Version 0.3.6"
 Description = [ "Implement PackageIt bug fixes.", "- Apply PackageIt bug fixes.",]
