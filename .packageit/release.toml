@@ -1,6 +1,10 @@
+[0.3.6]
+Title = "Version 0.3.6"
+Description = [ "Implement PackageIt bug fixes.", "- Apply PackageIt bug fixes.",]
+
 [0.3.5]
 Title = "Version 0.3.5"
-Description = [ "Verify the version string.",'- SemVerIt should only accept version strings in the format n.n.n. Any other string should be rejected with an exception.', 'Implement Exception class.']
+Description = [ "Verify the version string.", "- SemVerIt should only accept version strings in the format n.n.n. Any other string should be rejected with an exception.", "Implement Exception class.",]
 
 [0.3.4]
 Title = "Version 0.3.4"

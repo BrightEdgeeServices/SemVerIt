@@ -5,18 +5,3 @@
 # packageit\pimp.ini and
 # D:\Dropbox\Projects\SemVerIt\.packageit\packageit.ini
 #===================================================================
-pip
-wheel
-beetools
-black
-configparserext
-gitignore_parser
-gitpython
-pre-commit
-pygithub
-pytest
-pytest-cov
-sphinx-autobuild
-sphinx
-termcolor
-twine
