@@ -8,15 +8,15 @@ repos:
       - id: check-toml
       - id: check-yaml
       - id: debug-statements
-      #      - id: double-quote-string-fixer
-      #      - id: mixed-line-ending
-      #        args: [ --fix=crlf ]
+#      - id: double-quote-string-fixer
+#      - id: mixed-line-ending
+#        args: [ --fix=crlf ]
       - id: no-commit-to-branch
         args: [ --branch, master ]
       - id: pretty-format-json
       - id: requirements-txt-fixer
-  #      - id: trailing-whitespace
-  #        args: [ --markdown-linebreak-ext=md ]
+#      - id: trailing-whitespace
+#        args: [ --markdown-linebreak-ext=md ]
 
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.19.1
@@ -35,19 +35,19 @@ repos:
     rev: v2.3.0
     hooks:
       - id: codespell
-        args: [ --write, --toml, pyproject.toml ]
+        args: [--write, --toml, pyproject.toml]
         additional_dependencies:
           - tomli
 
   - repo: https://github.com/psf/black
     rev: 24.10.0
     hooks:
-      - id: black
-        language_version: python3
+    - id: black
+      language_version: python3
 
   - repo: https://github.com/pycqa/flake8
     rev: 7.1.1
     hooks:
-      - id: flake8
-        language_version: python3
-        exclude: 'templates'
+    - id: flake8
+      language_version: python3
+      exclude: 'templates'
