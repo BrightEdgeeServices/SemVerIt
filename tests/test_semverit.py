@@ -1,17 +1,14 @@
 """Testing semverit__init__()"""
 
 from pathlib import Path
-from beetools.beearchiver import Archiver
-import pytest
-import semverit
 
+import pytest
+
+import semverit
 
 _PROJ_DESC = __doc__.split("\n")[0]
 _PROJ_PATH = Path(__file__)
 _PROJ_NAME = _PROJ_PATH.stem
-
-
-b_tls = Archiver(_PROJ_DESC, _PROJ_PATH)
 
 
 class TestSemVerIt:
@@ -32,7 +29,7 @@ class TestSemVerIt:
         assert t_semverit.min == 0
         assert t_semverit.patch == 0
         assert t_semverit.version == "0.0.0"
-        assert t_semverit._log_name == "{}.semverit".format(_PROJ_NAME)
+        assert t_semverit._log_name == f"{_PROJ_NAME}.semverit"
         assert t_semverit.logger
         assert t_semverit.logger
 
@@ -359,6 +356,3 @@ class TestSemVerIt:
         with pytest.raises(semverit.FaultyVersionString):
             semverit.SemVerIt.verify(sample_faulty)
         pass
-
-
-del b_tls

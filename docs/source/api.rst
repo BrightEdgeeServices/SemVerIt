@@ -5,5 +5,5 @@
 API
 ===
 
-.. automodule:: semverit.semverit
+.. automodule:: semverit
     :members:

@@ -3,16 +3,13 @@
 Define the fixture functions in this file to make them accessible across multiple test files.
 """
 
-
 from pathlib import Path
+
 import pytest
-from beetools.beearchiver import Archiver
-from beetools.beeutils import rm_tree
+from beetools.utils import rm_tree
 
 _PROJ_DESC = __doc__.split("\n")[0]
 _PROJ_PATH = Path(__file__)
-
-b_tls = Archiver(_PROJ_DESC, _PROJ_PATH)
 
 _sample_faulty_set = [
     "1.1.1.1",
@@ -92,6 +89,3 @@ def sample_ok(request):
 @pytest.fixture(params=_sample_faulty_set)
 def sample_faulty(request):
     yield request.param
-
-
-del b_tls
