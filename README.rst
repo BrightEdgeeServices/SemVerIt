@@ -1,91 +1,106 @@
-.. image:: https://img.shields.io/pypi/status/SemVerIt
-    :alt: PyPI - Status
+================
+SemVerIt
+================
 
-.. image:: https://img.shields.io/pypi/wheel/SemVerIt
-    :alt: PyPI - Wheel
++-----------+------------------------------------------------------------------------------------+
+|**General**| |maintenance_y| |semver| |license|                                                 |
++-----------+------------------------------------------------------------------------------------+
+|**CI**     | |codestyle| |codecov|                                                              |
++-----------+------------------------------------------------------------------------------------+
+|**PyPI**   | |pypi_release| |pypi_py_versions| |pypi_status| |pypi_format| |pypi_downloads|     |
++-----------+------------------------------------------------------------------------------------+
+|**Github** | |gh_issues| |gh_language| |gh_last_commit| |gh_deployment|                         |
++-----------+------------------------------------------------------------------------------------+
 
-.. image:: https://img.shields.io/pypi/pyversions/SemVerIt
-    :alt: PyPI - Python Version
 
-.. image:: https://img.shields.io/github/v/release/hendrikdutoit/SemVerIt
-    :alt: GitHub release (latest by date)
+Manipulate semantic version strings:
 
-.. image:: https://img.shields.io/github/license/hendrikdutoit/SemVerIt
+#. Create a new version number,
+#. initialize it with an existing number
+#. Read it from an existing project setup.cfg file.
+#. Validate the version string.
+#. Compare one version number with another. See also https://semver.org/
+
+
+.. General
+
+.. |maintenance_n| image:: https://img.shields.io/badge/Maintenance%20Intended-✖-red.svg?style=flat-square
+    :target: http://unmaintained.tech/
+    :alt: Maintenance - not intended
+
+.. |maintenance_y| image:: https://img.shields.io/badge/Maintenance%20Intended-✔-green.svg?style=flat-square
+    :target: http://unmaintained.tech/
+    :alt: Maintenance - intended
+
+.. |license| image:: https://img.shields.io/pypi/l/SemVerIt
+    :target: https://github.com/BrightEdgeeServices/SemVerIt/blob/master/LICENSE
     :alt: License
 
-.. image:: https://img.shields.io/github/issues-raw/hendrikdutoit/SemVerIt
-    :alt: GitHub issues
+.. |semver| image:: https://img.shields.io/badge/Semantic%20Versioning-2.0.0-brightgreen.svg?style=flat-square
+    :target: https://semver.org/
+    :alt: Semantic Versioning - 2.0.0
 
-.. image:: https://img.shields.io/pypi/dm/SemVerIt
-    :alt: PyPI - Downloads
+.. |codestyle| image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
+    :alt: Code Style Black
 
-.. image:: https://img.shields.io/github/search/hendrikdutoit/SemVerIt/GitHub
-    :alt: GitHub Searches
 
-.. image:: https://img.shields.io/codecov/c/gh/hendrikdutoit/SemVerIt
+.. CI
+
+.. |pre_commit_ci| image:: https://img.shields.io/github/actions/workflow/status/BrightEdgeeServices/SemVerIt/pre-commit.yml?label=pre-commit
+    :target: https://github.com/BrightEdgeeServices/SemVerIt/blob/master/.github/workflows/pre-commit.yml
+    :alt: Pre-Commit
+
+.. |gha_tests| image:: https://img.shields.io/github/actions/workflow/status/BrightEdgeeServices/SemVerIt/ci.yml?label=ci
+    :target: https://github.com/BrightEdgeeServices/SemVerIt/blob/master/.github/workflows/ci.yml
+    :alt: Test status
+
+.. |gha_docu| image:: https://img.shields.io/readthedocs/sqlalchemyexample
+    :target: https://github.com/BrightEdgeeServices/SemVerIt/blob/master/.github/workflows/check-rst-documentation.yml
+    :alt: Read the Docs
+
+.. |codecov| image:: https://img.shields.io/codecov/c/gh/BrightEdgeeServices/SemVerIt
+    :target: https://app.codecov.io/gh/BrightEdgeeServices/SemVerIt
     :alt: CodeCov
-    :target: https://app.codecov.io/gh/hendrikdutoit/SemVerIt
 
-.. image:: https://img.shields.io/github/workflow/status/hendrikdutoit/SemVerIt/Pre-Commit
-    :alt: GitHub Actions - Pre-Commit
-    :target: https://github.com/hendrikdutoit/SemVerIt/actions/workflows/pre-commit.yaml
 
-.. image:: https://img.shields.io/github/workflow/status/hendrikdutoit/SemVerIt/CI
-    :alt: GitHub Actions - CI
-    :target: https://github.com/hendrikdutoit/SemVerIt/actions/workflows/ci.yaml
+.. PyPI
 
-.. image:: https://img.shields.io/pypi/v/SemVerIt
-    :alt: PyPi
+.. |pypi_release| image:: https://img.shields.io/pypi/v/SemVerIt
+    :target: https://pypi.org/project/SemVerIt/
+    :alt: PyPI - Package latest release
 
-Manipulate semantic versioning (SemVer)
+.. |pypi_py_versions| image:: https://img.shields.io/pypi/pyversions/SemVerIt
+    :target: https://pypi.org/project/SemVerIt/
+    :alt: PyPI - Supported Python Versions
 
-    Manipulate semantic version strings: 1. Create a new version number, 1. initialize it with an existing number 1. Read it from an existing project setup.cfg file. 1. Validate the version string. 1. Compare one version number with another. See also https://semver.org/
+.. |pypi_format| image:: https://img.shields.io/pypi/wheel/SemVerIt
+    :target: https://pypi.org/project/SemVerIt/
+    :alt: PyPI - Format
 
-=======
-Testing
-=======
+.. |pypi_downloads| image:: https://img.shields.io/pypi/dm/SemVerIt
+    :target: https://pypi.org/project/SemVerIt/
+    :alt: PyPI - Monthly downloads
 
-This project uses ``pytest`` to run tests and also to test docstring examples.
+.. |pypi_status| image:: https://img.shields.io/pypi/status/SemVerIt
+    :target: https://pypi.org/project/SemVerIt/
+    :alt: PyPI - Status
 
-Install the test dependencies.
 
-.. code-block:: bash
+.. GitHub
 
-    $ pip install -r requirements_test.txt
+.. |gh_issues| image:: https://img.shields.io/github/issues-raw/BrightEdgeeServices/SemVerIt
+    :target: https://github.com/BrightEdgeeServices/SemVerIt/issues
+    :alt: GitHub - Issue Counter
 
-Run the tests.
+.. |gh_language| image:: https://img.shields.io/github/languages/top/BrightEdgeeServices/SemVerIt
+    :target: https://github.com/BrightEdgeeServices/SemVerIt
+    :alt: GitHub - Top Language
 
-.. code-block:: bash
+.. |gh_last_commit| image:: https://img.shields.io/github/last-commit/BrightEdgeeServices/SemVerIt/master
+    :target: https://github.com/BrightEdgeeServices/SemVerIt/commit/master
+    :alt: GitHub - Last Commit
 
-    $ pytest tests
-    === XXX passed in SSS seconds ===
-
-==========
-Developing
-==========
-
-This project uses ``black`` to format code and ``flake8`` for linting. We also support ``pre-commit`` to ensure these have been run. To configure your local environment please install these development dependencies and set up the commit hooks.
-
-.. code-block:: bash
-
-    $ pip install black flake8 pre-commit
-    $ pre-commit install
-
-=========
-Releasing
-=========
-
-Releases are published automatically when a tag is pushed to GitHub.
-
-.. code-block:: bash
-
-    # Set next version number
-    export RELEASE = x.x.x
-    
-    # Create tags
-    git commit --allow -empty -m "Release $RELEASE"
-    git tag -a $RELEASE -m "Version $RELEASE"
-    
-    # Push
-    git push upstream --tags
-
+.. |gh_deployment| image:: https://img.shields.io/github/deployments/BrightEdgeeServices/SemVerIt/pypi
+    :target: https://github.com/BrightEdgeeServices/SemVerIt/deployments/pypi
+    :alt: GitHub - PiPy Deployment
